@@ -1,1 +1,16 @@
 <h1>Task Manager</h1>
+<div ng-controller="TasksController" ng-init="getTasks()">
+  <form ng-submit="submitTask()">
+    <label>Name</label>
+    <input type="text" ng-model="task.name">
+    <label>Description</label>
+    <input type="text" ng-model="task.description">
+    <button type="submit">Add Task</button>
+  </form>
+
+  <ul ng-repeat="task in tasks | orderBy:filter:reverse">
+    <li ng-model="task.name">{{task.name}}</li>
+    <li ng-model="task.description">{{task.description}}</li>
+    <li ng-model="task.created_at">{{task.created_at | date : 'medium'}}</li>
+  </ul>
+</div>
