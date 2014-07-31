@@ -11,7 +11,7 @@ describe "CRUDing Tasks" do
         id: task.id,
         name: "Get Groceries",
         description: "Monday",
-        created_at: task.created_at
+        updated_at: task.updated_at
       }.to_json
 
       expect(response.status).to eq 200
@@ -34,19 +34,19 @@ describe "CRUDing Tasks" do
           id: task1.id,
           name: task1.name,
           description: task1.description,
-          created_at: task1.created_at
+          updated_at: task1.updated_at
         },
         {
           id: task2.id,
           name: task2.name,
           description: task2.description,
-          created_at: task2.created_at
+          updated_at: task2.updated_at
         },
         {
           id: task3.id,
           name: task3.name,
           description: task3.description,
-          created_at: task3.created_at
+          updated_at: task3.updated_at
         }
       ].to_json
 

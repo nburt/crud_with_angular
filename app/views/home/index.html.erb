@@ -2,15 +2,32 @@
 <div ng-controller="TasksController" ng-init="getTasks()">
   <form ng-submit="submitTask()">
     <label>Name</label>
-    <input type="text" ng-model="task.name">
+    <input type="text" ng-model="task.name" ng-init="task.name = ''" ng-class="nameErrorClass">
     <label>Description</label>
-    <input type="text" ng-model="task.description">
+    <input type="text" ng-model="task.description" ng-init="task.description = ''" ng-class="descriptionErrorClass">
     <button type="submit">Add Task</button>
   </form>
 
+  <div class="errors" ng-repeat="error in errors">
+    {{error}}
+  </div>
+
   <ul ng-repeat="task in tasks | orderBy:filter:reverse">
-    <li ng-model="task.name">{{task.name}}</li>
-    <li ng-model="task.description">{{task.description}}</li>
-    <li ng-model="task.created_at">{{task.created_at | date : 'medium'}}</li>
+    <div ng-hide="task.editMode">
+      <li ng-model="task.name" ng-class="task.editMode">{{task.name}}</li>
+      <li ng-model="task.description">{{task.description}}</li>
+      <li ng-model="task.created_at">{{task.updated_at | date : 'medium'}}</li>
+      <button type="submit" ng-click="task.editMode = true">Edit</button>
+      <button type="submit" ng-click="deleteTask(task,$index)">Delete</button>
+    </div>
+
+    <form ng-show="task.editMode" ng-submit="editTask(task)">
+      <label>Name</label>
+      <input type="text" ng-model="task.name">
+      <label>Description</label>
+      <input type="text" ng-model="task.description">
+      <button type="submit">Edit Task</button>
+      <button type="submit" ng-click="task.editMode = false">Cancel</button>
+    </form>
   </ul>
 </div>
